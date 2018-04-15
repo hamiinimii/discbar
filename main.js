@@ -19,8 +19,8 @@ const Tray = electron.Tray
 let win
 let barIcon
 
-function createWindow () {
-  // Windowsのサイズを決めて、オブジェクト生成する。
+let createWindow = function() {
+  // Windowのサイズを決めて、オブジェクト生成する。
   win = new BrowserWindow({
     'width': 800,
     'height': 600
