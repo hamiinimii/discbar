@@ -31,12 +31,10 @@ app.on('ready', createWindow)
 
 // 全てのウィンドウが閉じられた時の処理
 app.on('window-all-closed', () => {
-  //macOSでもwindowを閉じる。
-  app.quit()
   // macOS(darwin)の場合、全てのウィンドウが閉じても メニューバーが生きている。
   // それ以外のOSは閉じる処理をする。macOSを考慮しなければ、このif文は不要で、app.quit()のみ記載すればいい。
   //if (process.platform !== 'darwin') {
-  //  app.quit()
+  app.quit()
   //}
 })
 
