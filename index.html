@@ -2,10 +2,40 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>electron</title>
+  <title>DiscBar</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <b>Hello World!</b>
+  <div id = "menu-bar">
+    <input type="text" id="url" value="https://discordapp.com/"></input>
+  </div>
+  <div id="webview_wrapper">
+    <webview id='view' src='https://discordapp.com/'></webview>
+  </div>
 </body>
-</html>
+<script>
+"use strict";
 
+let load = function(){
+  //reset_webview/webview_wrapper
+  let webview_wrapper = document.getElementById("webview_wrapper");
+  webview_wrapper.removeChild(webview_wrapper.lastChild);
+
+  //get url
+  let url = document.getElementById("url").value;
+
+  //create_new_webview_instanse
+  let newWebView = document.createElement("webview");
+  newWebview.id = "foo";
+  newWebView.setAttribute("src",url);
+  //append new_webview
+  webview_wrapper.appendChild(newWebView);
+}
+
+let opendev = function(){
+  let webview = document.getElementById("foo");
+  webview.openDevTools();
+}
+</script>
+
+</html>

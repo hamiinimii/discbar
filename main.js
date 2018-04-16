@@ -25,7 +25,7 @@ let createWindow = function() {
 
   // 同じ階層にいるindex.htmlを読み込む
   win.loadURL(`file://${__dirname}/index.html`)
-
+  
   // Chromium のDevToolsを有効にする。
   //win.webContents.openDevTools()
 
