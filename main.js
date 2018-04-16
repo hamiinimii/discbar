@@ -1,12 +1,9 @@
-//厳格モード。曖昧な表現や変数宣言を怠るとエラーになるので、常につけるべき、おまじない。
+//厳格モード
 'use strict';
 
 //nodeの書き方。requireは、括弧内のものを読み込み、宣言したオブジェクトに格納する。
 //ここでは「electron」というnodeのモジュールを読み込む。
 //読み込みはモジュールだけじゃなく、括弧内に「'./hoge.txt'」などを書けばそのファイルを読み込むことができる。
-//const {app, BrowserWindow} = require('electron');
-//const Tray = require('tray');
-
 
 const electron = require('electron')
 const app = electron.app
@@ -42,7 +39,7 @@ let createWindow = function() {
 // Electronの初期化が完了し、ブラウザウインドウの作成準備が完了したときに呼び出される。
 app.on('ready', createWindow)
 
-//ステータスバー等の通知エリアでのアイコンを作成
+// ステータスバー等の通知エリアでのアイコンを作成
 app.on('ready',() => {
   barIcon = new Tray(__dirname +'/images/icon.png');
   let contextMenu = Menu.buildFromTemplate([
@@ -54,8 +51,7 @@ app.on('ready',() => {
 
 // 全てのウィンドウが閉じられた時の処理
 app.on('window-all-closed', () => {
-  // macOS(darwin)の場合、全てのウィンドウが閉じても メニューバーが生きている。
-  // それ以外のOSは閉じる処理をする。macOSを考慮しなければ、このif文は不要で、app.quit()のみ記載すればいい。
+  // macOS(darwin)の場合、全てのウィンドウが閉じてもappを生かすことができる。
   //if (process.platform !== 'darwin') {
   app.quit()
   //}
@@ -63,8 +59,7 @@ app.on('window-all-closed', () => {
 
 /*
 app.on('activate', () => {
-  // macOSのドックアイコンをクリックした際にウィンドウを再生成する。
-  // macOSを考慮しなければ、このapp.onの関数自体不要。
+  // macOS：ドックアイコンをクリックした際にウィンドウを再生成する。（ウィンドウなしでappが生きている場合）
   if (win === null) {
     createWindow()
   }
