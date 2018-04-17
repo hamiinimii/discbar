@@ -3,4 +3,5 @@
 //レンダープロセス用のipcモジュールをインポート
 const ipcRenderer = electron.ipcRenderer
 
-ipc.on
+
+ipcRenderer.sendToHost('result',document.body.innerText);
