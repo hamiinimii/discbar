@@ -10,11 +10,12 @@ const app = electron.app
 const BrowserWindow = electron.BrowserWindow
 const Menu = electron.Menu
 const Tray = electron.Tray
+const ipcMain = electron.ipcMain
 
 
 //オブジェクトが勝手に破棄されないように、空オブジェクトのグローバル変数を宣言します。
 let win
-let barIcon
+let appIcon
 
 let createWindow = function() {
   // Windowのサイズを決めて、オブジェクト生成する。
@@ -23,11 +24,11 @@ let createWindow = function() {
     'height': 600
   })
 
-  // 同じ階層にいるindex.htmlを読み込む
-  win.loadURL(`file://${__dirname}/index.html`)
+  // index.htmlを読み込む
+  win.loadURL(`file://${__dirname}/src/index.html`)
 
   // Chromium のDevToolsを有効にする。
-  //win.webContents.openDevTools()
+  win.webContents.openDevTools()
 
   // 表示したWindowを閉じたときの処理
   win.on('closed', () => {
@@ -41,12 +42,12 @@ app.on('ready', createWindow)
 
 // ステータスバー等の通知エリアでのアイコンを作成
 app.on('ready',() => {
-  barIcon = new Tray(__dirname +'/images/icon.png');
+  appIcon = new Tray(__dirname +'/images/icon.png');
   let contextMenu = Menu.buildFromTemplate([
     { label: 'Item1', type: 'radio'}
   ])
-  barIcon.setToolTip('This is my application.')
-  barIcon.setContextMenu(contextMenu)
+  appIcon.setToolTip('This is my application.')
+  appIcon.setContextMenu(contextMenu)
 })
 
 // 全てのウィンドウが閉じられた時の処理
