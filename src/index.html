@@ -2,35 +2,26 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>DiscBar</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <!-- <div id = "menu-bar">
-    <input type="text" id="url" value="https://discordapp.com/"></input>
-  </div> -->
-  <!-- <script src='ipc-host.js'></script> -->
-  <div id="webview_wrapper">
-    <webview id="view"
-    src='https://discordapp.com/channels/@me'
-    autosize="on"
-    preload="view.js"
-    ></webview>
-  </div>
+  <p id='quote'>Just do it!</p>
+  <script>
+   'use strict';
+   const quote = document.getElementById('quote');
+   const quotes = [
+     'Stay hungry, stay foolish',
+     'Done is better than perfect',
+     'Ask, do not tell',
+     'Focus on the user',
+     'That which is measured, improves'
+   ];
+
+   window.addEventListener('click',function(){
+    quote.innerHTML = quotes[Math.floor(Math.random()*quotes.length)];
+  });
+
+  </script>
+
 
 </body>
-<script>
-"use strict";
-
-// let viewed = document.getElementById('view');
-// console.log(viewed.send('iconChange'))
-
-
-//viewed.send('iconChange')
-// let opendev = function(){
-  // let webview = document.getElementById("foo");
-  // webview.openDevTools();
-//}
-</script>
-
-</html>

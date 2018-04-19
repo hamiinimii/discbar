@@ -6,27 +6,62 @@
 //読み込みはモジュールだけじゃなく、括弧内に「'./hoge.txt'」などを書けばそのファイルを読み込むことができる。
 
 const electron = require('electron')
-const app = electron.app
-const BrowserWindow = electron.BrowserWindow
-const Menu = electron.Menu
-const Tray = electron.Tray
-const ipcMain = electron.ipcMain
+const {app,BrowserWindow,dialog,ipcMain,Menu,Tray} = electron;
 
+// const app = electron.app
+// const BrowserWindow = electron.BrowserWindow
+// const Menu = electron.Menu
+// const Tray = electron.Tray
+// const ipcMain = electron.ipcMain
 
 //オブジェクトが勝手に破棄されないように、空オブジェクトのグローバル変数を宣言します。
 let win
+let settingsWin
 let appIcon
 
-let createWindow = function() {
-  // Windowのサイズを決めて、オブジェクト生成する。
-  win = new BrowserWindow({'width': 800,'height': 600})
-  // index.htmlを読み込む
-  win.loadURL(`file://${__dirname}/src/index.html`)
-  // Chromium のDevToolsを有効にする。
-  win.webContents.openDevTools()
-  // 表示したWindowを閉じたときの初期化処理
-  win.on('closed', () => {win = null})
+//Menuのテンプレートを作り、呼び出す。
+let menuTemplate =[{
+  label: 'MyApp' , //第一項はアプリ名になる
+  submenu: [
+    {label: 'About', accelerator: 'CmdOrCtrl+Shift+A', click:
+    function(){showAboutDialog();}},
+    {type: 'separator'},
+    {label: 'Settings', accelerator: 'CmdOrCtrl+,', click:
+    function(){showSettingsWindow();}},
+    {type: 'separator'},
+    {label: 'Quit', accelerator: 'CmdOrCtrl+Q', click:
+    function(){app.quit(); }}
+  ]
+}];
+let menu = Menu.buildFromTemplate(menuTemplate);
+
+//functions
+let createWindow =()=> {
+  Menu.setApplicationMenu(menu); //Menuを生成する。
+  win = new BrowserWindow({'width': 800,'height': 600})   // Windowのサイズを決めて、オブジェクト生成する。
+  win.loadURL(`file://${__dirname}/src/index.html`) // index.htmlを読み込む
+  win.webContents.openDevTools() // Chromium のDevToolsを有効にする。
+
+  win.on('closed', () => {win = null}) // 表示したWindowを閉じたときの初期化処理
 }
+
+let showAboutDialog =()=>{
+  dialog.showMessageBox({
+    type: 'info',
+    buttons: ['OK'],
+    message: 'About This App',
+    detail: 'This app was created by hamiinimii'
+  })
+}
+
+let showSettingsWindow =()=> {
+  settingsWin = new BrowserWindow({'width': 800,'height': 600});
+  settingsWin.loadURL(`file://${__dirname}/src/settings.html`);
+  settingsWin.webContents.openDevTools();
+  settingsWin.show();
+  settingsWin.on('closed', () => {settingsWin = null});
+}
+
 
 // Electronの初期化が完了し、ブラウザウインドウの作成準備が完了したときに呼び出される。
 app.on('ready', createWindow)
