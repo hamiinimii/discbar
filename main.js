@@ -19,22 +19,13 @@ let appIcon
 
 let createWindow = function() {
   // Windowのサイズを決めて、オブジェクト生成する。
-  win = new BrowserWindow({
-    'width': 800,
-    'height': 600
-  })
-
+  win = new BrowserWindow({'width': 800,'height': 600})
   // index.htmlを読み込む
   win.loadURL(`file://${__dirname}/src/index.html`)
-
   // Chromium のDevToolsを有効にする。
   win.webContents.openDevTools()
-
-  // 表示したWindowを閉じたときの処理
-  win.on('closed', () => {
-    // オブジェクトを初期化する
-    win = null
-  })
+  // 表示したWindowを閉じたときの初期化処理
+  win.on('closed', () => {win = null})
 }
 
 // Electronの初期化が完了し、ブラウザウインドウの作成準備が完了したときに呼び出される。
