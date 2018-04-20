@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <script>
+  'use strict'
+  const {ipcRenderer} = require('electron');
+  </script>
+
+  <p id='quote'>Just do it!</p>
+  <script>
+   'use strict';
+   const quote = document.getElementById('quote');
+   const quotes = [
+     'Stay hungry, stay foolish',
+     'Done is better than perfect',
+     'Ask, do not tell',
+     'Focus on the user',
+     'That which is measured, improves'
+   ];
+
+   window.addEventListener('click',function(){ //クリックを契機に起動
+    quote.innerHTML = quotes[Math.floor(Math.random()*quotes.length)];
+  });
+
+  //settingsの色変更を受け取る
+  ipcRenderer.on('set_bgcolor', function(event, color){
+    document.body.style.backgroundColor = color;
+  })
+  </script>
+
+
+</body>

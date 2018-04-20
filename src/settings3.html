@@ -52,7 +52,7 @@
        colors[i].checked = true;
      }
      //色それぞれに対してイベントを設定。for文は読み込み時に一度処理されるようだ
-     colors[i].addEventListener('change',function(){
+     colors[i].addEventListener('change',function(event){
        let color = this.value;
        console.log(color);
        //色の変化が発生した時、ipcによりmainへ送る。チャネル名は好きに指定

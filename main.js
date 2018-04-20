@@ -1,12 +1,13 @@
 //厳格モード
 'use strict';
 
-//nodeの書き方。requireは、括弧内のものを読み込み、宣言したオブジェクトに格納する。
-//ここでは「electron」というnodeのモジュールを読み込む。
-//読み込みはモジュールだけじゃなく、括弧内に「'./hoge.txt'」などを書けばそのファイルを読み込むことができる。
+// main.js
+// -src/index.html
+//  -//view.js
 
-const electron = require('electron')
-const {app,BrowserWindow,dialog,ipcMain,Menu,Tray} = electron;
+//nodeの書き方。requireは、括弧内のものを読み込み、宣言したオブジェクトに格納する。ここでは「electron」というnodeのモジュールを読み込む。
+//読み込みはモジュールだけじゃなく、括弧内に「'./hoge.txt'」などを書けばそのファイルを読み込むことができる。
+const {app,BrowserWindow,dialog,ipcMain,Menu,Tray} = require('electron')
 
 // const app = electron.app
 // const BrowserWindow = electron.BrowserWindow
@@ -15,9 +16,10 @@ const {app,BrowserWindow,dialog,ipcMain,Menu,Tray} = electron;
 // const ipcMain = electron.ipcMain
 
 //オブジェクトが勝手に破棄されないように、空オブジェクトのグローバル変数を宣言します。
-let win
-let settingsWin
-let appIcon
+let win;
+let settingsWin;
+let appIcon;
+let backgroundColor = 'skyblue';
 
 //Menuのテンプレートを作り、呼び出す。
 let menuTemplate =[{
@@ -34,6 +36,24 @@ let menuTemplate =[{
   ]
 }];
 let menu = Menu.buildFromTemplate(menuTemplate);
+
+//ipcによるやりとり。処理の引数はイベント及びその値
+// ipcMain.on('settings_changed', function(event, color){ //onは変化を取得
+//   win.webContents.send('set_bgcolor', color);
+// });
+ipcMain.on('settings_changed', function(event, color){ //onは変化を取得
+  win.webContents.send('iconChange', color);
+});
+
+
+// ipcMain.on('get_bgcolor', function(event){ //同期通信はeventのみを引数に受け取る
+//   event.returnValue = backgroundColor; //
+// });
+// ここでconsole.logしたらターミナルの方に行った
+ipcMain.on('clicked', function(event){
+  console.log('ACHIEVED');
+  appIcon = Tray(__dirname +'/images/icon2.png');
+})
 
 //functions
 let createWindow =()=> {
