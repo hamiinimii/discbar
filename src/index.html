@@ -24,15 +24,25 @@
 <script>
 "use strict";
 
+let webview = document.getElementById('view');
+
+let timer = setInterval(function(){
+  webview.send('retriever');
+}, 1000);
+
+webview.addEventListener('ipc-message', function(event){
+  switch(event.channel){
+    case 'retriever':
+    console.log(unreadCount);
+    break;
+  }
+})
+
+// console.log(document.getElementById('webview_wrapper').innerHTML);
+
 // ipcRenderer.on('iconChange', function(event){
 //     let ifIconChange = document.getElementsByTagName(link)
 // })
-
-//viewed.send('iconChange')
-// let opendev = function(){
-  // let webview = document.getElementById("foo");
-  // webview.openDevTools();
-//}
 </script>
 
 </html>

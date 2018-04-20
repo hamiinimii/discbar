@@ -17,8 +17,8 @@ let backgroundColor = 'skyblue';
 // ipcMain.on('settings_changed', function(event, color){ //onは変化を取得
 //   win.webContents.send('set_bgcolor', color);
 // });
-ipcMain.on('settings_changed', function(event, color){ //onは変化を取得
-  win.webContents.send('iconChange', color);
+ipcMain.on('clicked', function(event){ //onは変化を取得
+  console.log('Achieved');
 });
 
 
@@ -29,7 +29,6 @@ ipcMain.on('settings_changed', function(event, color){ //onは変化を取得
 
 //functions
 let createWindow =()=> {
-  Menu.setApplicationMenu(menu); //Menuを生成する。
   win = new BrowserWindow({'width': 800,'height': 600})   // Windowのサイズを決めて、オブジェクト生成する。
   win.loadURL(`file://${__dirname}/src/index.html`) // index.htmlを読み込む
   win.webContents.openDevTools() // Chromium のDevToolsを有効にする。
