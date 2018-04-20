@@ -6,15 +6,13 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-  <script>
-  'use strict'
-  const {ipcRenderer} = require('electron');
-  </script>
-
+  <!-- <div id = "menu-bar">
+    <input type="text" id="url" value="https://discordapp.com/"></input>
+  </div> -->
+  <!-- <script src='ipc-host.js'></script> -->
   <div id="webview_wrapper">
     <webview id="view"
-    src='index3.html'
+    src='https://discordapp.com/channels/@me'
     autosize="on"
     preload="view.js"
     ></webview>
@@ -24,9 +22,9 @@
 <script>
 "use strict";
 
-// ipcRenderer.on('iconChange', function(event){
-//     let ifIconChange = document.getElementsByTagName(link)
-// })
+let viewed = document.getElementById('view');
+// console.log(viewed.send('iconChange'))
+
 
 //viewed.send('iconChange')
 // let opendev = function(){
