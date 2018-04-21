@@ -21,12 +21,6 @@ ipcMain.on('clicked', function(event){ //onは変化を取得
   console.log('Achieved');
 });
 
-
-// ipcMain.on('get_bgcolor', function(event){ //同期通信はeventのみを引数に受け取る
-//   event.returnValue = backgroundColor; //
-// });
-// ここでconsole.logしたらターミナルの方に行った
-
 //functions
 let createWindow =()=> {
   win = new BrowserWindow({'width': 800,'height': 600})   // Windowのサイズを決めて、オブジェクト生成する。
