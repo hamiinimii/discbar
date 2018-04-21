@@ -23,20 +23,13 @@
 </body>
 <script>
 "use strict";
+  onload = function(){
+    let webview = document.getElementById('view');
 
-let webview = document.getElementById('view');
-
-let timer = setInterval(function(){
-  webview.send('retriever');
-}, 1000);
-
-webview.addEventListener('ipc-message', function(event){
-  switch(event.channel){
-    case 'retriever':
-    console.log(unreadCount);
-    break;
+    webview.addEventListener('ipc-message', function(event){
+      alert(event.args[0]);
+    });
   }
-})
 
 // console.log(document.getElementById('webview_wrapper').innerHTML);
 

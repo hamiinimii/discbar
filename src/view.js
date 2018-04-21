@@ -3,10 +3,10 @@
 //レンダープロセス用のipcモジュールをインポート
 const {ipcRenderer} = require('electron');
 
-ipcRenderer.on('retriever',function(){
+onload = function(){
   let unreadCount = document.getElementById('quote').innerHTML;
-  ipcRenderer.sendToHost('retriever', unreadCount);
-})
+  ipcRenderer.sendToHost('retrieved', unreadCount);
+}
 
 // window.addEventListener('click',function(){ //クリックを契機に起動
 //  ipcRenderer.send('clicked');
