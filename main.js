@@ -17,9 +17,9 @@ let backgroundColor = 'skyblue';
 // ipcMain.on('settings_changed', function(event, color){ //onは変化を取得
 //   win.webContents.send('set_bgcolor', color);
 // });
-ipcMain.on('retrieved', function(event,iconChange){ //onは変化を取得
-  console.log(iconChange);
-  appIcon.setImage(iconChange==='TUl'?__dirname + '/images/icon2.png':__dirname + '/images/icon1.png');
+ipcMain.on('retrieved', function(event,iconName){ //onは変化を取得
+  console.log(iconName);
+  appIcon.setImage(iconName==='TUl'?__dirname + '/images/icon2.png':__dirname + '/images/icon1.png');
 });
 
 //functions
