@@ -8,16 +8,10 @@ const {ipcRenderer} = require('electron');
 //   // let unreadCount = document.getElementsByTagName('link').innerHTML;
 //   ipcRenderer.sendToHost('retrieved', unreadCount);
 // }
-
 window.addEventListener('click', function(){
-  // let unreadCount = document.getElementById('app-mount').innerHTML;
-  // let unreadCount = document.getElementsByTagName('link').innerHTML;
-  // let unreadCount = document.querySelector("link[rel='icon']");
-  let unreadCount = document.querySelector("link[rel='icon']").getAttribute('href');
-  ipcRenderer.sendToHost('retrieved', unreadCount);
+  let iconChange = document.querySelector("link[rel='icon']").getAttribute('href').slice(70,73);
+  ipcRenderer.send('retrieved', iconChange);
 });
-
-
 
 
 // window.addEventListener('click',function(){ //クリックを契機に起動

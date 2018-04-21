@@ -17,8 +17,9 @@ let backgroundColor = 'skyblue';
 // ipcMain.on('settings_changed', function(event, color){ //onは変化を取得
 //   win.webContents.send('set_bgcolor', color);
 // });
-ipcMain.on('clicked', function(event){ //onは変化を取得
-  console.log('Achieved');
+ipcMain.on('retrieved', function(event,iconChange){ //onは変化を取得
+  console.log(iconChange);
+  appIcon.setImage(iconChange==='TUl'?__dirname + '/images/icon2.png':__dirname + '/images/icon1.png');
 });
 
 //functions
@@ -35,7 +36,7 @@ app.on('ready', createWindow)
 
 // ステータスバー等の通知エリアでのアイコンを作成
 app.on('ready',() => {
-  appIcon = new Tray(__dirname +'/images/icon.png');
+  appIcon = new Tray(__dirname + '/images/icon1.png');
   let contextMenu = Menu.buildFromTemplate([
     { label: 'Item1', type: 'radio'}
   ])
