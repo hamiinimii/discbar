@@ -19,7 +19,7 @@ let backgroundColor = 'skyblue';
 // });
 ipcMain.on('retrieved', function(event,iconName){ //onは変化を取得
   console.log(iconName);
-  // appIcon.setImage(iconName==='TUl'?__dirname + '/images/icon2.png':__dirname + '/images/icon1.png');
+  appIcon.setImage(iconName==='TUl'?__dirname + '/images/icon2.png':__dirname + '/images/icon1.png');
 });
 
 //functions
