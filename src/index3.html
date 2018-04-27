@@ -26,10 +26,6 @@
     quote.innerHTML = quotes[Math.floor(Math.random()*quotes.length)];
   });
 
-  //settingsの色変更を受け取る
-  ipcRenderer.on('set_bgcolor', function(event, color){
-    document.body.style.backgroundColor = color;
-  })
   </script>
 
 
