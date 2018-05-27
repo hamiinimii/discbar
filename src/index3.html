@@ -2,6 +2,7 @@
 <html>
 <head>
   <meta charset="utf-8">
+    <title>Quoter</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -9,7 +10,6 @@
   'use strict'
   const {ipcRenderer} = require('electron');
   </script>
-
   <p id='quote'>Just do it!</p>
   <script>
    'use strict';
@@ -21,6 +21,14 @@
      'Focus on the user',
      'That which is measured, improves'
    ];
+
+   // //MutationObserver test
+   // var mo = new MutationObserver(function(MutationRecords){
+   //   alert(quote.innerHTML);
+   // });
+   // const config2 = {childList :true, characterData: true};
+   // mo.observe(quote, config2);
+   // //end
 
    window.addEventListener('click',function(){ //クリックを契機に起動
     quote.innerHTML = quotes[Math.floor(Math.random()*quotes.length)];
